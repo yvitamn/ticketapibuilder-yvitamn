@@ -1,0 +1,26 @@
+[project]
+name = "ticketapibuilder-yvitamn"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11.13"
+dependencies = [
+    "flask>=3.1.1",
+    "flask-migrate>=4.1.0",
+    "flask-sqlalchemy>=3.1.1",
+    "marshmallow>=4.0.0",
+    "marshmallow-sqlalchemy>=1.4.2",
+    "psycopg2-binary>=2.9.10",
+    "pytest>=8.4.1",
+    "python-dotenv>=1.1.1",
+    "taskipy>=1.14.1",
+]
+
+[scripts]
+flask = "flask"
+run = "flask run --host=$HOST --port=$PORT"
+test = "pytest"
+db-init = "flask db init"
+db-upgrade = "flask db upgrade"
+db-downgrade = "flask db downgrade -1"
+db-migrate = "flask db migrate -m 'describe changes'"
