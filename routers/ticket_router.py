@@ -21,6 +21,7 @@ def get_all():
 def get_one(ticket_id):
     ticket = get_ticket_by_id(ticket_id)
     return format_response(ticket)
+
 @ticket_bp.route("/", methods=["POST"])
 def create():
     try:

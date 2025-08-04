@@ -5,8 +5,8 @@ from schemas.ticket_schema import TicketSchema
 from marshmallow import ValidationError
 
 ticket_repo = TicketRepository()
-ticket_schema = TicketSchema()
-ticket_list_schema = TicketSchema(many=True)
+ticket_schema = TicketSchema() #validating one ticket
+ticket_list_schema = TicketSchema(many=True) #validating multiple tickets
 
 def get_all_tickets():
     tickets = ticket_repo.get_all()
