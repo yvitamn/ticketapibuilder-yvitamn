@@ -1,5 +1,6 @@
 from flask import abort
 from instance.database import db
+from models.ticket_model import Ticket
 from repos.ticket_repo import TicketRepository
 from schemas.ticket_schema import TicketSchema
 from marshmallow import ValidationError
@@ -18,14 +19,13 @@ def get_ticket_by_id(ticket_id: int):
         abort(404, "Ticket not found")
     return ticket_schema.dump(ticket)
 
-def create_ticket(data):
-    try:
-        validated_data = ticket_schema.load(data)
-    except ValidationError as err:
-        abort(400, err.messages)
-
-    ticket = ticket_repo.add(validated_data)
-    return ticket_schema.dump(ticket)
+def create_ticket(data: dict):
+    # load = validate + create instance
+    ticket = ticket_schema.load(data)
+    db.session.add(ticket)
+    db.session.commit()
+    return ticket
+    
 
 def mark_ticket_used(ticket_id):
     ticket = ticket_repo.get_by_id(ticket_id)

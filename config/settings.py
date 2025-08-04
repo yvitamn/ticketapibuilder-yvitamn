@@ -5,7 +5,7 @@ from flask import Flask
 from flask_migrate import Migrate
 from routers.ticket_router import ticket_bp
 from config.database import initialize_database
-from shared.error_handlers import register_error_handlers
+from shared.error_handlers import format_response, register_error_handlers
 from config.local import LocalConfig
 from dotenv import load_dotenv
 import importlib
@@ -33,19 +33,13 @@ def create_app(config_module="config.local.LocalConfig"):
     # 5. Register Components
     with app.app_context():
         from models.ticket_model import Ticket
-        app.register_blueprint(ticket_bp)
+        app.register_blueprint(ticket_bp, url_prefix="/tickets")
         register_error_handlers(app)
         
-    @app.route("/hello")
-    def hello():
+    @app.route("/")
+    def root():
         return format_response({"message": "API is working!"})
-
-    @app.route("/error")
-    def error():
-        # This will trigger 500
-        raise Exception("Oops!")
-          
-
+    
     return app
         
  

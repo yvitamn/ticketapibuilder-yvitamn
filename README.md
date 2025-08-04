@@ -90,7 +90,15 @@ flask run
 ### Database Operations
 
 #### CRUD Ticket
+GET /api/tickets → list all
 
+POST /api/tickets → create
+
+GET /api/tickets/<id> → get single
+
+PUT /api/tickets/<id> → update
+
+DELETE /api/tickets/<id> → delete
 
 
 ### Supabase Connection Notes

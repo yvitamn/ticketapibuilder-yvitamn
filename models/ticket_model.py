@@ -24,8 +24,8 @@ class Ticket(db.Model):
         return {
         "id": self.id,
         "eventName": self.eventName,
-            "location": self.location,
-            "time": self.time.isoformat(),
-            "isUsed": self.isUsed
+        "location": self.location,
+        "time": self.time.isoformat(),
+        "isUsed": self.isUsed
     }
     

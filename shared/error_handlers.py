@@ -1,3 +1,4 @@
+import traceback
 from flask import jsonify
 
 def format_response(data=None, success=True, status_code=200):
@@ -12,6 +13,7 @@ def format_response(data=None, success=True, status_code=200):
 
 def handle_error(message, status_code):
     """Error response formatter"""
+    traceback.print_exc()
     return jsonify({
         "data": {
             "message": message

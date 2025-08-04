@@ -1,6 +1,3 @@
-# def main():
-#     print("Hello from ticketapibuilder-yvitamn!")
-
 from instance.database import db
 from config.settings import create_app
 

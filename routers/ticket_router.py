@@ -1,5 +1,7 @@
 from flask import Blueprint, request, jsonify
 from marshmallow import ValidationError
+from models.ticket_model import Ticket
+from schemas.ticket_schema import TicketSchema
 from services.ticket_service import (
     get_all_tickets,
     get_ticket_by_id,
@@ -10,7 +12,9 @@ from services.ticket_service import (
 from shared.error_handlers import format_response, handle_error
 
 
-ticket_bp = Blueprint("tickets", __name__, url_prefix="/tickets")
+ticket_bp = Blueprint("tickets", __name__)
+ticket_schema = TicketSchema()
+
 
 @ticket_bp.route("/", methods=["GET"])
 def get_all():
@@ -24,15 +28,16 @@ def get_one(ticket_id):
 
 @ticket_bp.route("/", methods=["POST"])
 def create():
+    data = request.get_json()
+    
     try:
-        data = request.get_json()
+        print("Received data:", data)
         ticket = create_ticket(data)
-        return format_response(ticket, status_code=201)
-    except ValidationError as e:
-        return handle_error(e.messages, 400)
+        return format_response(ticket_schema.dump(ticket), status_code=201)
     except Exception as e:
-        return handle_error(str(e), 500)
-
+        print("Exception in /tickets:", e)
+        return handle_error(str(e), 400)
+    
 @ticket_bp.route("/<int:ticket_id>", methods=["PATCH"])
 def mark_used(ticket_id):
     ticket = mark_ticket_used(ticket_id)
