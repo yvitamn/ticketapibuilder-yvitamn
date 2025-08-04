@@ -19,7 +19,7 @@ dependencies = [
 
 [tool.taskipy.tasks]
 flask = "flask"
-run = "flask run --host=$HOST --port=$PORT"
+run = "flask run --host=127.0.0.1 --port=5001"
 test = "pytest"
 db-init = "flask db init"
 db-upgrade = "flask db upgrade"

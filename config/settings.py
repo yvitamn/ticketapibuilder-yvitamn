@@ -35,6 +35,10 @@ def create_app(config_module="config.local.LocalConfig"):
         from models.ticket_model import Ticket
         app.register_blueprint(ticket_bp)
         register_error_handlers(app)
+        
+    @app.route("/")
+    def index():
+        return {"message": "API is running"}, 200
           
 
     return app
