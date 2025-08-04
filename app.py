@@ -5,7 +5,7 @@ from instance.database import db
 from config.settings import create_app
 
 
-app = create_app("config.settings.LocalConfig")  
+app = create_app("config.local.LocalConfig")  
 
 
 # FlaskInjector(app=app, modules=[configure])

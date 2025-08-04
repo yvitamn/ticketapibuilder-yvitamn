@@ -14,7 +14,7 @@ load_dotenv()
 class LocalConfig(BaseConfig):
     DEBUG = True
     
-    DB_PASSWORD = ""  
+    DB_PASSWORD = "0goKcnBB94G6LTMo"  
     DB_USER = ""  
     DB_NAME = "postgres"  
     DB_HOST = "aws-0-us-east-2.pooler.supabase.com"
