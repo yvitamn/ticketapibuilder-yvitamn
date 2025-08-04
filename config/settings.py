@@ -36,9 +36,14 @@ def create_app(config_module="config.local.LocalConfig"):
         app.register_blueprint(ticket_bp)
         register_error_handlers(app)
         
-    @app.route("/")
-    def index():
-        return {"message": "API is running"}, 200
+    @app.route("/hello")
+    def hello():
+        return format_response({"message": "API is working!"})
+
+    @app.route("/error")
+    def error():
+        # This will trigger 500
+        raise Exception("Oops!")
           
 
     return app

@@ -1,5 +1,24 @@
 from flask import jsonify
 
+def format_response(data=None, success=True, status_code=200):
+    """Standard response formatter for all endpoints"""
+    if data is None:
+        data = {}
+        
+    return jsonify({
+        "data": data,
+        "success": success
+    }), status_code
+
+def handle_error(message, status_code):
+    """Error response formatter"""
+    return jsonify({
+        "data": {
+            "message": message
+        },
+        "success": False
+    }), status_code
+
 def register_error_handlers(app):
     @app.errorhandler(400)
     def handle_400_error(e):
