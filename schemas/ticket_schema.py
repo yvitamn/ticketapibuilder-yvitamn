@@ -20,7 +20,7 @@ class TicketSchema(SQLAlchemyAutoSchema):
     # time = fields.DateTime(required=True, data_key="eventTime")
     # isUsed = fields.Bool(dump_only=True)
 
-    time = auto_field(required=True)
+    time = auto_field(required=True, format="iso")
       
     # @validates_schema
     def validate_time(self, data):
@@ -29,10 +29,10 @@ class TicketSchema(SQLAlchemyAutoSchema):
             now = utc_now()
    
             if data.get('location') == 'Jakarta':
-                event_time = event_time.replace(tzinfo=timezone(timedelta(hours=7))
-                event_time = event_time.astimezone(timezone.utc)
+                # Convert Jakarta time to UTC by subtracting 7 hours
+                event_time = event_time - timedelta(hours=7)
 
             if event_time <= now:
-                raise ValidationError("Event time must be in the future")
+                raise ValidationError("Event time must be in the future. Jakarta events must be in local time.")
         
 ticket_schema = TicketSchema()
