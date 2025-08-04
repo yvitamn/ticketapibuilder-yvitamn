@@ -14,3 +14,5 @@ app = create_app("config.local.LocalConfig")
 
 if __name__ == "__main__":
     app.run()
+
+
