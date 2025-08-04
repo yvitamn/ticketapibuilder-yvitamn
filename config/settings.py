@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 import importlib
 
 
+
 def create_app(config_module="config.local.LocalConfig"):
     load_dotenv()  # Load environment variables from .env file
     
@@ -31,7 +32,7 @@ def create_app(config_module="config.local.LocalConfig"):
         
     # 5. Register Components
     with app.app_context():
-        from models import Ticket
+        from models.ticket_model import Ticket
         app.register_blueprint(ticket_bp)
         register_error_handlers(app)
           

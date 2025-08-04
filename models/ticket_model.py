@@ -1,14 +1,15 @@
 from sqlalchemy import Column, Integer, String, Boolean, DateTime
 from instance.database import db  
+from shared.database.chrono import utc_now
 
 class Ticket(db.Model):
-    __tablename__ = "tickets"
+    __tablename__ = "ticket"
 
-    id = Column(Integer, primary_key=True)
-    eventName = Column(String(100), nullable=False)
-    location = Column(String(100), nullable=True)
-    time = Column(DateTime, nullable=False)
-    isUsed = Column(Boolean, default=False)
+    id = db.Column(Integer, primary_key=True)
+    eventName = db.Column(db.String(100), nullable=False)
+    location = db.Column(db.String(100), nullable=True)
+    time = db.Column(db.DateTime, default=utc_now, nullable=False)
+    isUsed = db.Column(db.Boolean, default=False)
     
     
     __table_args__ = (
@@ -22,8 +23,9 @@ class Ticket(db.Model):
     def serialize(self):
         return {
         "id": self.id,
-        "name": self.name,
-        "is_used": self.is_used,
-        "created_at": self.created_at.isoformat()
+        "eventName": self.eventName,
+            "location": self.location,
+            "time": self.time.isoformat(),
+            "isUsed": self.isUsed
     }
     
