@@ -15,11 +15,12 @@ class LocalConfig(BaseConfig):
     DEBUG = True
     
     DB_PASSWORD = "0goKcnBB94G6LTMo"  
-    DB_USER = ""  
+    DB_USER = "postgres.ueknsmzkyrggrklkuzpq"  
     DB_NAME = "postgres"  
     DB_HOST = "aws-0-us-east-2.pooler.supabase.com"
     DB_PORT = 5432  
-    # postgresql://postgres.ipavhgmapltdbglfqbuz:[YOUR-PASSWORD]@aws-0-us-east-2.pooler.supabase.com:5432/postgres
+    
+    # postgresql://postgres.ueknsmzkyrggrklkuzpq:[YOUR-PASSWORD]@aws-0-us-east-2.pooler.supabase.com:5432/postgres
     
     # SECRET_KEY = "super-secret-key"  # You can load this from env if needed
     SQLALCHEMY_DATABASE_URI = os.getenv(
